@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Textile — European Linen for the Home</title>
+<meta name="description" content="Stonewashed European linen bedding, bath and table textiles. Woven slowly, softer with every wash.">
+<meta name="theme-color" content="#ECEBE7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECEBE7;--paper:#F6F5F2;--ink:#1B1C20;--muted:#6B6A66;--line:rgba(27,28,32,.12);--line2:rgba(27,28,32,.22);--indigo:#24305C;--sage:#7F907A;--flax:#C9B99A;
+  --serif:'Instrument Serif',Georgia,serif;--sans:'Instrument Sans',system-ui,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.18;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.wrap{width:min(1320px,100% - 48px);margin-inline:auto}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.02em}
+.ph{position:relative;overflow:hidden;background:linear-gradient(150deg,#dcd8cf,#c9c3b6)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .6s}
+.ph img.broken{opacity:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;padding:15px 28px;border-radius:999px;font-weight:500;font-size:15px;transition:background .3s,color .3s,transform .3s var(--ease)}
+.btn.dark{background:var(--ink);color:var(--paper)}.btn.dark:hover{background:var(--indigo)}
+.btn.out{border:1px solid var(--ink)}.btn.out:hover{background:var(--ink);color:var(--paper)}
+
+/* nav */
+.ann{background:var(--indigo);color:#E5E8F3;font-size:13px;text-align:center;padding:9px 16px}
+.ann b{font-weight:600}
+.nav{position:sticky;top:0;z-index:50;background:rgba(236,235,231,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:74px}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:14.5px}
+.nav ul a{position:relative}.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav ul a:hover::after{transform:scaleX(1);transform-origin:left}
+.logo{font-family:var(--serif);font-size:32px;letter-spacing:-.02em}
+.logo i{font-style:italic}
+.nav .r{justify-self:end;display:flex;gap:8px;align-items:center}
+.bag{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;border:1px solid var(--ink);font-weight:500;font-size:14px}
+.bag b{min-width:22px;height:22px;border-radius:999px;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-size:12px;padding:0 6px;transition:transform .3s var(--ease)}
+.bag.bump b{transform:scale(1.35)}
+
+/* hero */
+.hero{padding:40px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:stretch;min-height:calc(100vh - 200px)}
+.hcopy{display:flex;flex-direction:column;justify-content:center;padding:40px 0}
+.hcopy small{font-size:14px;color:var(--muted);display:flex;gap:12px;align-items:center}
+.hcopy small i{width:40px;height:1px;background:var(--ink)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(60px,8.6vw,142px);line-height:.9;letter-spacing:-.035em;margin:26px 0 30px}
+.hero h1 em{font-style:italic;color:var(--indigo)}
+.hero p{font-size:18px;color:#45443F;max-width:430px;margin-bottom:34px}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+.rating{display:flex;align-items:center;gap:14px;margin-top:44px;font-size:14px;color:var(--muted)}
+.rating .faces{display:flex}.rating .faces span{width:36px;height:36px;border-radius:50%;border:2px solid var(--bg);margin-left:-10px;overflow:hidden}.rating .faces span:first-child{margin-left:0}
+.rating b{color:var(--ink)}
+.stage{position:relative;border-radius:36px;overflow:hidden;background:radial-gradient(70% 60% at 50% 30%,#FBFAF7,#E3E0D8 70%,#D6D1C6);min-height:620px;border:1px solid var(--line)}
+#cloth{position:absolute;inset:0;width:100%;height:100%}
+.cloth-fallback{position:absolute;left:22%;right:22%;top:12%;bottom:14%;border-radius:4px 4px 30px 30px;background:var(--cw,#24305C);background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 2px,transparent 2px 5px),repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 6px);box-shadow:0 40px 60px -30px rgba(0,0,0,.4);transition:background-color .6s}
+.gl-ready .cloth-fallback{display:none}
+.stage .tag{position:absolute;top:24px;left:24px;z-index:2;padding:10px 16px;border-radius:999px;background:rgba(246,245,242,.85);backdrop-filter:blur(10px);font-size:13px;border:1px solid var(--line)}
+.stage .tag b{font-weight:600}
+.cwbar{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 14px 14px 22px;border-radius:24px;background:rgba(246,245,242,.88);backdrop-filter:blur(14px);border:1px solid var(--line);flex-wrap:wrap}
+.cwbar .nm{font-family:var(--serif);font-size:26px;line-height:1}
+.cwbar .nm small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:4px}
+.sw{display:flex;gap:8px}
+.sw button{width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 3px var(--paper);border:1.5px solid transparent;transition:transform .3s var(--ease)}
+.sw button:hover{transform:scale(1.12)}
+.sw button[aria-pressed="true"]{border-color:var(--ink)}
+.drag-hint{position:absolute;right:24px;top:24px;z-index:2;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+
+/* marquee */
+.mq{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:22px 0}
+.mq .tr{display:inline-flex;gap:56px;animation:mq 40s linear infinite;font-family:var(--serif);font-size:30px;font-style:italic}
+.mq span::after{content:"✳";font-style:normal;margin-left:56px;color:var(--sage);font-size:20px;vertical-align:middle}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:130px 0}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
+h2.serif{font-size:clamp(46px,6.2vw,96px);line-height:.95}
+h2.serif em{font-style:italic;color:var(--indigo)}
+.lead{color:#45443F;font-size:18px;max-width:460px}
+
+/* shop */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{padding:9px 18px;border-radius:999px;border:1px solid var(--line2);font-size:14px;transition:.3s}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 20px}
+.prod{cursor:pointer}
+.prod .ph{aspect-ratio:4/5;border-radius:18px;margin-bottom:16px}
+.prod .ph img{position:absolute;inset:0}
+.prod .ph img.alt{opacity:0}
+.prod:hover .ph img.alt:not(.broken){opacity:1}
+.prod:hover .ph img{transform:scale(1.05)}
+.tint{position:absolute;inset:0;mix-blend-mode:multiply;opacity:0;transition:opacity .6s,background-color .6s;pointer-events:none}
+.prod .qa{position:absolute;left:12px;right:12px;bottom:12px;z-index:2;padding:12px;border-radius:999px;background:rgba(246,245,242,.92);backdrop-filter:blur(10px);font-weight:500;font-size:14px;text-align:center;transform:translateY(130%);transition:transform .5s var(--ease)}
+.prod:hover .qa,.prod:focus-within .qa{transform:none}
+.prod .new{position:absolute;top:12px;left:12px;z-index:2;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--paper)}
+.prod h3{font-size:16px;font-weight:500}
+.prod .meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:var(--muted)}
+.dots{display:flex;gap:6px}
+.dots button{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bg);border:1px solid transparent}
+.dots button[aria-pressed="true"]{border-color:var(--ink)}
+.prod[hidden]{display:none}
+
+/* horizontal process */
+.process{background:var(--indigo);color:#E9EBF4;padding:0;overflow:hidden}
+.hs{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0}
+.hs-top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:40px}
+.hs-top h2{color:#fff}
+.hs-top h2 em{color:var(--flax)}
+.hs-top .cnt{font-family:var(--serif);font-size:24px;color:#B9C0DA}
+.track{display:flex;gap:24px;padding-left:max(24px,calc((100vw - 1320px)/2));will-change:transform}
+.pane{flex:0 0 min(560px,80vw);display:grid;grid-template-rows:auto 1fr;gap:22px}
+.pane .ph{aspect-ratio:16/10;border-radius:24px;background:linear-gradient(150deg,#3a4677,#1b2447)}
+.pane .n{font-family:var(--serif);font-size:72px;line-height:1;color:var(--flax)}
+.pane h3{font-family:var(--serif);font-weight:400;font-size:38px;color:#fff;margin:4px 0 8px}
+.pane p{color:#B9C0DA;max-width:440px}
+.pane .row{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+
+/* lookbook */
+.look{position:relative;border-radius:36px;overflow:hidden;aspect-ratio:16/8}
+.look>.ph{position:absolute;inset:0}
+.hot{position:absolute;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(246,245,242,.95);display:grid;place-items:center;font-size:18px;box-shadow:0 0 0 0 rgba(246,245,242,.6);animation:ring 2.4s infinite}
+@keyframes ring{70%{box-shadow:0 0 0 18px rgba(246,245,242,0)}100%{box-shadow:0 0 0 0 rgba(246,245,242,0)}}
+.pop{position:absolute;z-index:3;width:240px;padding:12px;border-radius:20px;background:var(--paper);box-shadow:0 30px 60px -20px rgba(0,0,0,.4);display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:.35s var(--ease)}
+.pop.on{opacity:1;transform:none;pointer-events:auto}
+.pop .ph{width:64px;height:64px;border-radius:12px}
+.pop b{display:block;font-weight:500;font-size:14px}
+.pop small{color:var(--muted)}
+.pop button{grid-column:1/-1;padding:9px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:13px;font-weight:500}
+.look .cap{position:absolute;left:28px;bottom:28px;z-index:2;color:#fff;font-family:var(--serif);font-size:clamp(28px,3vw,44px);line-height:1;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+
+/* care + news */
+.care .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.care details{border-bottom:1px solid var(--line);padding:22px 0}
+.care summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;font-family:var(--serif);font-size:30px}
+.care summary::after{content:"+";font-family:var(--sans);font-weight:300;transition:transform .3s}
+.care details[open] summary::after{transform:rotate(45deg)}
+.care details p{color:#45443F;margin-top:10px;max-width:520px}
+.care .ph{aspect-ratio:4/5;border-radius:30px}
+.news{text-align:center;border-top:1px solid var(--line)}
+.news p{color:var(--muted);max-width:460px;margin:18px auto 32px}
+.news form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.news input{padding:15px 22px;min-width:320px;border-radius:999px;border:1px solid var(--ink);background:transparent;outline:none}
+footer.f{background:var(--ink);color:#A9ACB4;padding:80px 0 120px;font-size:14px}
+footer.f .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+footer.f .logo{color:var(--paper);font-size:44px}
+footer.f h4{color:var(--paper);font-weight:500;margin-bottom:12px}
+footer.f ul{list-style:none;display:grid;gap:8px}
+
+/* modal + drawer */
+.scrim{position:fixed;inset:0;background:rgba(27,28,32,.35);backdrop-filter:blur(4px);z-index:90;opacity:0;pointer-events:none;transition:opacity .35s}
+.scrim.on{opacity:1;pointer-events:auto}
+.qv{position:fixed;left:50%;top:50%;z-index:91;width:min(980px,calc(100% - 24px));max-height:calc(100vh - 24px);overflow:auto;border-radius:30px;background:var(--paper);display:grid;grid-template-columns:1.05fr 1fr;transform:translate(-50%,-46%) scale(.97);opacity:0;pointer-events:none;transition:.45s var(--ease);box-shadow:0 60px 120px -40px rgba(0,0,0,.5)}
+.qv.on{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.qv .ph{min-height:520px}
+.qv .info{padding:36px;display:flex;flex-direction:column;gap:16px}
+.qv h3{font-family:var(--serif);font-weight:400;font-size:44px;line-height:1}
+.qv .price{font-size:22px}
+.qv label{font-size:13px;color:var(--muted);display:block;margin-bottom:8px}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.sizes button{padding:10px 16px;border-radius:12px;border:1px solid var(--line2);font-size:14px}
+.sizes button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.qtyb{display:inline-flex;align-items:center;gap:14px;padding:5px;border-radius:999px;border:1px solid var(--line2)}
+.qtyb button{width:36px;height:36px;border-radius:50%;font-size:18px}.qtyb button:hover{background:var(--bg)}
+.qv .x{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;background:var(--paper);font-size:18px;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.qv ul{list-style:none;display:grid;gap:6px;font-size:14px;color:#45443F;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);z-index:92;background:var(--paper);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .55s var(--ease)}
+.drawer.on{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:1px solid var(--line)}
+.drawer header h3{font-family:var(--serif);font-weight:400;font-size:34px}
+.drawer .x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2)}
+.ship{padding:16px 24px;border-bottom:1px solid var(--line);font-size:14px}
+.ship .bar{height:6px;border-radius:6px;background:var(--bg);overflow:hidden;margin-top:8px}.ship .bar i{display:block;height:100%;background:var(--sage);transition:width .6s var(--ease)}
+.dbody{flex:1;overflow:auto;padding:8px 24px}
+.ln{display:grid;grid-template-columns:76px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+.ln .ph{width:76px;height:92px;border-radius:12px}
+.ln b{display:block;font-weight:500}.ln small{color:var(--muted);display:block}
+.ln .qtyb{transform:scale(.85);transform-origin:left;margin-top:6px}
+.ln .rm{font-size:13px;color:var(--muted);text-decoration:underline}
+.dfoot{padding:22px 24px;border-top:1px solid var(--line)}
+.dfoot .tot{display:flex;justify-content:space-between;font-size:18px;margin-bottom:16px}
+.dfoot .btn{width:100%}
+.emptyb{text-align:center;padding:70px 10px;color:var(--muted)}
+.emptyb .serif{font-size:34px;color:var(--ink);margin-bottom:6px}
+.okv{text-align:center;padding:60px 20px}
+.okv .ic{width:84px;height:84px;border-radius:50%;margin:0 auto 20px;background:var(--sage);color:#fff;display:grid;place-items:center;font-size:34px;animation:pop .6s var(--ease)}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.toast{position:fixed;left:50%;top:90px;transform:translate(-50%,-20px);z-index:95;padding:12px 18px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:14px;opacity:0;transition:.4s var(--ease);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1050px){.grid{grid-template-columns:repeat(2,1fr)}.nav ul{display:none}.nav .wrap{grid-template-columns:1fr auto}.nav nav{display:none}}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0}.stage{min-height:460px;order:-1}.hcopy{padding:10px 0}
+  .care .wrap{grid-template-columns:1fr}.qv{grid-template-columns:1fr}.qv .ph{min-height:300px}
+  footer.f .wrap{grid-template-columns:1fr 1fr}
+  .hs{height:auto;padding:90px 0}.track{flex-direction:column;padding:0 24px}.pane{flex:none;width:100%}
+  .look{aspect-ratio:4/5}
+}
+@media (max-width:560px){.drag-hint{display:none}.stage{min-height:500px!important}.cwbar{left:12px;right:12px;bottom:12px;padding:12px 12px 12px 16px;gap:10px}.cwbar .btn{padding:10px 16px!important;font-size:14px}.sw button{width:26px;height:26px}
+.wrap{width:calc(100% - 32px)}section{padding:90px 0}.grid{gap:28px 12px}.news input{min-width:0;width:100%}.cwbar .nm{font-size:20px}.stage{min-height:420px}.prod .qa{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+.ilx{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:85;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-radius:999px;background:rgba(15,11,28,.86);backdrop-filter:blur(16px);border:1px solid rgba(183,156,255,.25);color:#E9E6F5;font:500 13px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 18px 50px -12px rgba(0,0,0,.4);white-space:nowrap}
+.ilx b{background:linear-gradient(90deg,#B79CFF,#22D3EE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.ilx a{color:#fff;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08)}
+.ilx a.go{background:linear-gradient(90deg,#8B5CF6,#06B6D4)}
+.ilx button{color:#9d97b6;font-size:18px;padding:0 6px}
+@media (max-width:560px){.ilx .t{display:none}}
+</style>
+</head>
+<body>
+<div class="ann">Free delivery over <b>€120</b> · 100-night trial on all bedding · Free returns</div>
+<header class="nav"><div class="wrap">
+  <nav aria-label="Main"><ul><li><a href="#shop">Shop</a></li><li><a href="#process">Our linen</a></li><li><a href="#look">Lookbook</a></li><li><a href="#care">Care</a></li></ul></nav>
+  <a class="logo" href="#top">Maison <i>Textile</i></a>
+  <div class="r"><button class="bag" id="bagBtn" aria-label="Open bag">Bag <b id="count">0</b></button></div>
+</div></header>
+
+<main id="top">
+<section class="hero" style="padding-top:28px">
+  <div class="wrap">
+    <div class="hcopy">
+      <small><i></i>Autumn collection 2026</small>
+      <h1>Linen that gets <em>softer</em> every wash</h1>
+      <p>Bedding, bath and table linen woven from European flax and stonewashed by hand, so it feels lived-in from the first night.</p>
+      <div class="acts"><a class="btn dark" href="#shop">Shop the collection</a><a class="btn out" href="#process">How it's made</a></div>
+      <div class="rating"><span class="faces"><span class="ph"><img src="https://images.unsplash.com/photo-1551184451-76b762941ad6?auto=format&fit=crop&w=100&q=70" alt=""></span><span class="ph"><img src="https://images.unsplash.com/photo-1603775020644-eb8decd79994?auto=format&fit=crop&w=100&q=70" alt=""></span><span class="ph"><img src="https://images.unsplash.com/photo-1675773051474-55c4b7d2cf53?auto=format&fit=crop&w=100&q=70" alt=""></span></span><span><b>★ 4.9</b> from 3,400 sleepers</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cloth" aria-label="A linen sheet moving in the breeze"></canvas>
+      <div class="cloth-fallback" aria-hidden="true"></div>
+      <span class="tag"><b>Bestseller</b> · Stonewashed duvet set</span>
+      <span class="drag-hint" aria-hidden="true">Move to feel the breeze ↝</span>
+      <div class="cwbar">
+        <div class="nm" id="cwName">Indigo<small>Duvet set · from €189</small></div>
+        <div class="sw" role="group" aria-label="Colourway" id="heroSw"></div>
+        <button class="btn dark" id="heroAdd" style="padding:12px 22px">Add to bag</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="tr"><span>100% European flax</span><span>OEKO-TEX certified</span><span>Woven in Portugal</span><span>Stonewashed by hand</span><span>100-night trial</span><span>100% European flax</span><span>OEKO-TEX certified</span><span>Woven in Portugal</span><span>Stonewashed by hand</span><span>100-night trial</span></div></div>
+
+<section id="shop"><div class="wrap">
+  <div class="sh"><h2 class="serif">The <em>collection</em></h2>
+    <div class="filters" role="group" aria-label="Filter products"><button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="bed">Bedding</button><button aria-pressed="false" data-f="bath">Bath</button><button aria-pressed="false" data-f="table">Table</button></div></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="process" id="process"><div class="hs" id="hs">
+  <div class="wrap hs-top"><h2 class="serif">From flax field <em>to your bed</em></h2><span class="cnt" id="hsCnt">4 steps</span></div>
+  <div class="track" id="track">
+    <div class="pane"><div class="ph"><img src="https://images.unsplash.com/photo-1545042746-ec9e5a59b359?auto=format&fit=crop&w=1000&q=80" alt="Rolls of natural textile" loading="lazy"></div><div class="row"><span class="n">01</span><div><h3>Grown</h3><p>Flax grows in Normandy and Flanders on rainwater alone. No irrigation, no synthetic fertilisers.</p></div></div></div>
+    <div class="pane"><div class="ph"><img src="https://images.unsplash.com/photo-1705290304352-4beef0b626b3?auto=format&fit=crop&w=1000&q=80" alt="Close-up of linen yarn texture" loading="lazy"></div><div class="row"><span class="n">02</span><div><h3>Spun</h3><p>The long fibres are wet-spun into a fine, even yarn that stays strong for decades.</p></div></div></div>
+    <div class="pane"><div class="ph"><img src="https://images.unsplash.com/photo-1614226114676-8e02ac5f4763?auto=format&fit=crop&w=1000&q=80" alt="Close-up of woven linen" loading="lazy"></div><div class="row"><span class="n">03</span><div><h3>Woven</h3><p>A family mill in Guimarães weaves every metre on slow looms for a dense, breathable hand.</p></div></div></div>
+    <div class="pane"><div class="ph"><img src="https://images.unsplash.com/photo-1518019671582-55004f1bc9ab?auto=format&fit=crop&w=1000&q=80" alt="Soft grey stonewashed linen" loading="lazy"></div><div class="row"><span class="n">04</span><div><h3>Stonewashed</h3><p>Washed with volcanic stones so it arrives soft, pre-shrunk and wonderfully creased.</p></div></div></div>
+  </div>
+</div></section>
+
+<section id="look"><div class="wrap">
+  <div class="sh"><h2 class="serif">Shop the <em>room</em></h2><p class="lead">Tap the dots to see what's in the picture.</p></div>
+  <div class="look" id="lookbox">
+    <div class="ph"><img src="https://images.unsplash.com/photo-1698746044340-ae5559412fd5?auto=format&fit=crop&w=1800&q=80" alt="A bedroom with white linen sheets, pillows and a vase of flowers" loading="lazy"></div>
+    <button class="hot" style="left:38%;top:46%" data-hot="0" aria-label="Linen duvet cover">+</button>
+    <button class="hot" style="left:62%;top:36%" data-hot="2" aria-label="Pillowcase pair">+</button>
+    <button class="hot" style="left:22%;top:70%" data-hot="3" aria-label="Waffle throw">+</button>
+    <div class="pop" id="pop"></div>
+    <span class="cap">The Sunday room</span>
+  </div>
+</div></section>
+
+<section class="care" id="care"><div class="wrap">
+  <div>
+    <h2 class="serif" style="margin-bottom:26px">Caring for <em>linen</em></h2>
+    <details open><summary>Washing</summary><p>Machine wash at 40°C with a mild detergent. Skip fabric softener; linen softens by itself.</p></details>
+    <details><summary>Drying</summary><p>Line dry in the shade, or tumble dry low and take it out while slightly damp.</p></details>
+    <details><summary>Ironing</summary><p>Not needed. The relaxed crease is the point. For a crisp look, iron on medium while damp.</p></details>
+    <details><summary>Storing</summary><p>Keep in a cool, dry cupboard and avoid plastic so the fibres can breathe.</p></details>
+  </div>
+  <div class="ph"><img src="https://images.unsplash.com/photo-1606796913825-2b02883605e9?auto=format&fit=crop&w=1000&q=80" alt="White bed linen next to a green plant" loading="lazy"></div>
+</div></section>
+
+<section class="news"><div class="wrap">
+  <h2 class="serif">10% off your <em>first order</em></h2>
+  <p>New colourways, restocks and the occasional care tip. One email a month, never more.</p>
+  <form id="news"><input type="email" required placeholder="Your email address" aria-label="Email address" autocomplete="email"><button class="btn dark">Subscribe</button></form>
+</div></section>
+</main>
+
+<footer class="f"><div class="wrap">
+  <div><div class="logo">Maison <i>Textile</i></div><p style="margin-top:10px">European linen for the home, since 2016.</p></div>
+  <div><h4>Shop</h4><ul><li>Bedding</li><li>Bath</li><li>Table</li><li>Gift cards</li></ul></div>
+  <div><h4>Help</h4><ul><li>Delivery</li><li>Returns</li><li>Size guide</li></ul></div>
+  <div><h4>Company</h4><ul><li>Our mills</li><li>Journal</li><li>Contact</li></ul></div>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="qv" id="qv" role="dialog" aria-label="Product details"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag">
+  <header><h3>Your bag</h3><button class="x" id="dx" aria-label="Close">✕</button></header>
+  <div class="ship" id="ship"></div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot" id="dfoot"><div class="tot"><span>Subtotal</span><b id="sub">€0</b></div><button class="btn dark" id="checkout">Checkout</button><p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px">Taxes included. Free returns within 30 days.</p></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+<div class="ilx" role="note"><span class="t">Demo by <b>iLoomX</b></span><a href="/preview">All projects</a><a class="go" href="/">Start a project</a><button aria-label="Hide this bar" onclick="this.parentElement.remove()">×</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const U=(id,w=800)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+const guard=i=>{const f=()=>i.classList.add('broken');if(i.complete&&!i.naturalWidth&&i.src)f();i.addEventListener('error',f)};
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const COLORS={natural:['Natural','#E8E2D6',null],indigo:['Indigo','#24305C','#3B4A86'],sage:['Sage','#7F907A','#93A48D'],rose:['Dusty rose','#A9787A','#C29193'],charcoal:['Charcoal','#3A3B3F','#55565C']};
+const P=[
+ {id:1,n:'Linen duvet cover',t:'bed',p:149,img:'photo-1698746044395-85beb2b04522',alt:'photo-1606855637183-ea2a00b6f15f',c:['natural','indigo','sage','rose'],nw:false},
+ {id:2,n:'Linen fitted sheet',t:'bed',p:79,img:'photo-1634665810235-011d663754e7',alt:'photo-1613395804277-ff52684350ca',c:['natural','sage','charcoal'],nw:false},
+ {id:3,n:'Pillowcase pair',t:'bed',p:45,img:'photo-1600414428640-f78a67c2aa3b',alt:'photo-1603400522537-35e25a14bc1e',c:['natural','indigo','rose'],nw:true},
+ {id:4,n:'Waffle throw',t:'bed',p:119,img:'photo-1638232928539-6e91c47ddec5',alt:'photo-1542728929-2b5d9a0c8d48',c:['natural','charcoal','sage'],nw:false},
+ {id:5,n:'Bath towel set',t:'bath',p:58,img:'photo-1616663717839-2fea42e1a1f6',alt:'photo-1760722974657-f64bce2f9cc5',c:['natural','sage','rose'],nw:false},
+ {id:6,n:'Waffle hand towels',t:'bath',p:32,img:'photo-1574421233376-06f2ccf017f7',alt:'photo-1728034261564-18930dcb2c8e',c:['natural','indigo'],nw:true},
+ {id:7,n:'Linen tablecloth',t:'table',p:89,img:'photo-1692651435527-a3ecf950ae30',alt:'photo-1709626142596-f99fda8e68f1',c:['natural','indigo','sage'],nw:false},
+ {id:8,n:'Napkins, set of 4',t:'table',p:36,img:'photo-1596433904493-c7ae3d6d179f',alt:'photo-1596433904747-e8b061219a71',c:['natural','rose','charcoal'],nw:false}];
+const sel={};P.forEach(p=>sel[p.id]=p.c[0]);
+const tintCSS=k=>COLORS[k][2]?`background-color:${COLORS[k][1]};opacity:.62`:'opacity:0';
+
+function renderGrid(){$('#grid').innerHTML=P.map(p=>`<article class="prod" data-t="${p.t}" data-id="${p.id}">
+  <div class="ph" tabindex="0" role="button" aria-label="Quick view ${p.n}"><img src="${U(p.img,700)}" alt="${p.n}" loading="lazy"><img class="alt" src="${U(p.alt,700)}" alt="" loading="lazy"><span class="tint" style="${tintCSS(sel[p.id])}"></span>${p.nw?'<span class="new">New</span>':''}<span class="qa">Quick view</span></div>
+  <h3>${p.n}</h3><div class="meta"><span>€${p.p}</span><span class="dots">${p.c.map(c=>`<button style="background:${COLORS[c][1]}" aria-label="${COLORS[c][0]}" aria-pressed="${sel[p.id]===c}" data-c="${c}"></button>`).join('')}</span></div></article>`).join('');
+  $$('#grid img').forEach(guard);
+  $$('.prod').forEach(el=>{const id=+el.dataset.id;el.querySelector('.ph').onclick=()=>openQV(id);el.querySelector('.ph').onkeydown=e=>{if(e.key==='Enter')openQV(id)};
+    el.querySelectorAll('.dots button').forEach(b=>b.onclick=e=>{e.stopPropagation();sel[id]=b.dataset.c;el.querySelectorAll('.dots button').forEach(x=>x.setAttribute('aria-pressed',x===b));el.querySelector('.tint').setAttribute('style',tintCSS(b.dataset.c))})});}
+renderGrid();
+$$('.filters button').forEach(b=>b.onclick=()=>{$$('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));$$('.prod').forEach(p=>p.hidden=b.dataset.f!=='all'&&p.dataset.t!==b.dataset.f);if(window.ScrollTrigger)ScrollTrigger.refresh()});
+
+/* quick view */
+let qv={id:null,c:null,size:'Double',q:1};
+function openQV(id){const p=P.find(x=>x.id===id);qv={id,c:sel[id],size:p.t==='bed'?'Double':'One size',q:1};
+  const sizes=p.t==='bed'?['Single','Double','King']:['One size'];
+  $('#qv').innerHTML=`<button class="x" id="qvx" aria-label="Close">✕</button><div class="ph"><img src="${U(p.img,1100)}" alt="${p.n}"><span class="tint" id="qvTint" style="${tintCSS(qv.c)}"></span></div>
+   <div class="info"><h3>${p.n}</h3><div class="price" id="qvPrice">€${p.p}</div><p style="color:#45443F">Stonewashed 100% European linen. Breathable in summer, cosy in winter, softer every wash.</p>
+   <div><label>Colour · <b id="qvC" style="color:var(--ink)">${COLORS[qv.c][0]}</b></label><div class="dots" id="qvDots">${p.c.map(c=>`<button style="background:${COLORS[c][1]};width:30px;height:30px" aria-label="${COLORS[c][0]}" aria-pressed="${qv.c===c}" data-c="${c}"></button>`).join('')}</div></div>
+   <div><label>Size</label><div class="sizes" id="qvS">${sizes.map(s=>`<button aria-pressed="${qv.size===s}">${s}</button>`).join('')}</div></div>
+   <div style="display:flex;gap:12px;align-items:center"><div class="qtyb"><button id="qm" aria-label="Less">−</button><b id="qq">1</b><button id="qp" aria-label="More">+</button></div><button class="btn dark" id="qadd" style="flex:1">Add to bag</button></div>
+   <ul><li>✓ 100-night trial</li><li>✓ Free delivery over €120</li><li>✓ OEKO-TEX Standard 100</li></ul></div>`;
+  guard($('#qv img'));
+  const price=()=>Math.round(p.p*(qv.size==='King'?1.25:qv.size==='Single'?.85:1));const upd=()=>{$('#qvPrice').textContent='€'+price()*qv.q;$('#qq').textContent=qv.q};
+  $$('#qvDots button').forEach(b=>b.onclick=()=>{qv.c=b.dataset.c;$$('#qvDots button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#qvTint').setAttribute('style',tintCSS(qv.c));$('#qvC').textContent=COLORS[qv.c][0]});
+  $$('#qvS button').forEach(b=>b.onclick=()=>{qv.size=b.textContent;$$('#qvS button').forEach(x=>x.setAttribute('aria-pressed',x===b));upd()});
+  $('#qm').onclick=()=>{qv.q=Math.max(1,qv.q-1);upd()};$('#qp').onclick=()=>{qv.q++;upd()};
+  $('#qadd').onclick=()=>{addToBag(p,qv.c,qv.size,qv.q,price());closeAll();};$('#qvx').onclick=closeAll;
+  $('#qv').classList.add('on');$('#scrim').classList.add('on');}
+function closeAll(){$('#qv').classList.remove('on');$('#drawer').classList.remove('on');$('#scrim').classList.remove('on')}
+$('#scrim').onclick=closeAll;addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+
+/* bag */
+const bag=[];let tt;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+function addToBag(p,c,size,q,price){const k=`${p.id}-${c}-${size}`;const ex=bag.find(b=>b.k===k);ex?ex.q+=q:bag.push({k,p,c,size,q,price});renderBag();
+  const b=$('#bagBtn');b.classList.add('bump');setTimeout(()=>b.classList.remove('bump'),300);toast(`${p.n} · ${COLORS[c][0]} added to your bag`)}
+function renderBag(){const n=bag.reduce((a,b)=>a+b.q,0),sub=bag.reduce((a,b)=>a+b.q*b.price,0);$('#count').textContent=n;$('#sub').textContent='€'+sub;
+  const left=120-sub;$('#ship').innerHTML=(left>0?`You're <b>€${left}</b> away from free delivery`:'✓ You\'ve unlocked <b>free delivery</b>')+`<div class="bar"><i style="width:${Math.min(100,sub/120*100)}%"></i></div>`;
+  $('#dfoot').hidden=!n;
+  $('#dbody').innerHTML=n?bag.map((b,i)=>`<div class="ln"><span class="ph"><img src="${U(b.p.img,200)}" alt=""><span class="tint" style="${tintCSS(b.c)}"></span></span><div><b>${b.p.n}</b><small>${COLORS[b.c][0]} · ${b.size}</small><div class="qtyb"><button data-m="${i}" aria-label="Less">−</button><b>${b.q}</b><button data-p="${i}" aria-label="More">+</button></div></div><div style="text-align:right"><b>€${b.q*b.price}</b><button class="rm" data-r="${i}">Remove</button></div></div>`).join('')
+   :'<div class="emptyb"><div class="serif">Your bag is empty</div><p>Start with our bestselling duvet set.</p><button class="btn out" style="margin-top:20px" id="shopNow">Shop bedding</button></div>';
+  $$('#dbody img').forEach(guard);
+  $$('[data-m]').forEach(x=>x.onclick=()=>{const b=bag[+x.dataset.m];b.q>1?b.q--:bag.splice(+x.dataset.m,1);renderBag()});
+  $$('[data-p]').forEach(x=>x.onclick=()=>{bag[+x.dataset.p].q++;renderBag()});
+  $$('[data-r]').forEach(x=>x.onclick=()=>{bag.splice(+x.dataset.r,1);renderBag()});
+  const sn=$('#shopNow');if(sn)sn.onclick=()=>{closeAll();document.getElementById('shop').scrollIntoView({behavior:'smooth'})}}
+$('#bagBtn').onclick=()=>{renderBag();$('#drawer').classList.add('on');$('#scrim').classList.add('on')};$('#dx').onclick=closeAll;
+$('#checkout').onclick=()=>{const b=$('#checkout');b.textContent='Processing…';setTimeout(()=>{bag.length=0;$('#count').textContent=0;$('#dfoot').hidden=true;$('#ship').innerHTML='';
+  $('#dbody').innerHTML=`<div class="okv"><div class="ic">✓</div><div class="serif" style="font-size:38px">Thank you</div><p style="color:var(--muted);margin-top:8px">Order MT-${Math.floor(10000+Math.random()*89999)} is confirmed. It ships tomorrow from our studio in Porto.</p></div>`;b.textContent='Checkout'},1200)};
+renderBag();
+
+/* lookbook */
+const pop=$('#pop');$$('.hot').forEach(h=>h.onclick=e=>{e.stopPropagation();const p=P[+h.dataset.hot];
+  pop.innerHTML=`<span class="ph"><img src="${U(p.img,160)}" alt=""></span><span><b>${p.n}</b><small>from €${p.p}</small></span><button>Add to bag</button>`;guard(pop.querySelector('img'));
+  pop.querySelector('button').onclick=()=>{addToBag(p,'natural',p.t==='bed'?'Double':'One size',1,p.p);pop.classList.remove('on')};
+  const box=$('#lookbox').getBoundingClientRect(),r=h.getBoundingClientRect();let x=r.left-box.left+44,y=r.top-box.top-20;if(x+250>box.width)x=r.left-box.left-250;pop.style.left=x+'px';pop.style.top=Math.max(10,y)+'px';pop.classList.add('on')});
+document.addEventListener('click',e=>{if(!e.target.closest('.pop'))pop.classList.remove('on')});
+$('#news').onsubmit=e=>{e.preventDefault();e.target.outerHTML='<p class="serif" style="font-size:30px;color:var(--ink)">You\'re in. Your 10% code is on its way.</p>'};
+document.querySelectorAll('img').forEach(guard);
+
+/* hero colourways */
+let cw='indigo';
+$('#heroSw').innerHTML=Object.entries(COLORS).map(([k,v])=>`<button style="background:${v[1]}" aria-label="${v[0]}" aria-pressed="${k===cw}" data-k="${k}"></button>`).join('');
+$$('#heroSw button').forEach(b=>b.onclick=()=>{cw=b.dataset.k;$$('#heroSw button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#cwName').firstChild.textContent=COLORS[cw][0];
+  document.documentElement.style.setProperty('--cw',COLORS[cw][1]);window.dispatchEvent(new CustomEvent('colourway',{detail:COLORS[cw][1]}))});
+$('#heroAdd').onclick=()=>addToBag(P[0],cw,'Double',1,189);
+
+/* motion */
+if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.registerPlugin(ScrollTrigger);gsap.ticker.lagSmoothing(0);
+  gsap.from('.hcopy>*',{y:40,opacity:0,duration:1.2,ease:'expo.out',stagger:.09,delay:.1});
+  gsap.from('.stage',{clipPath:'inset(12% 12% 12% 12% round 36px)',duration:1.6,ease:'expo.out',delay:.2});
+  gsap.utils.toArray('h2.serif,.care details,.look').forEach(el=>gsap.from(el,{y:50,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%'}}));
+  ScrollTrigger.batch('.prod',{start:'top 92%',onEnter:b=>gsap.from(b,{y:50,opacity:0,duration:1,ease:'expo.out',stagger:.08})});
+  const mm=gsap.matchMedia();
+  mm.add('(min-width: 861px)',()=>{const tr=$('#track');const dist=()=>tr.scrollWidth-innerWidth+80;
+    gsap.to(tr,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#hs',start:'top top',end:()=>'+='+dist(),pin:true,scrub:1,invalidateOnRefresh:true,
+      onUpdate:s=>$('#hsCnt').textContent=`Step ${Math.min(4,1+Math.floor(s.progress*4))} of 4`}})});
+}
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('cloth'),stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMappingExposure=.85;renderer.shadowMap.enabled=true;
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(30,1,.1,100);camera.position.set(0,.1,10.5);
+scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(),.04).texture;
+scene.add(new THREE.HemisphereLight(0xffffff,0xd8d2c4,.6));
+const key=new THREE.DirectionalLight(0xfff6ea,2.2);key.position.set(6,2.5,3);key.castShadow=true;key.shadow.mapSize.set(1024,1024);scene.add(key);
+const fill=new THREE.DirectionalLight(0xdfe6ff,.7);fill.position.set(-5,1,3);scene.add(fill);
+
+// linen texture
+const tc=document.createElement('canvas');tc.width=tc.height=512;const c=tc.getContext('2d');c.fillStyle='#c4c4c4';c.fillRect(0,0,512,512);
+let sd=3;const rnd=()=>{sd=(sd*16807)%2147483647;return(sd-1)/2147483646};
+for(let i=0;i<512;i+=2){c.fillStyle=`rgba(255,255,255,${.1+rnd()*.25})`;c.fillRect(0,i,512,1);c.fillStyle=`rgba(0,0,0,${.05+rnd()*.12})`;c.fillRect(i,0,1,512)}
+for(let i=0;i<140;i++){const y=rnd()*512,w=20+rnd()*120,x=rnd()*512;c.fillStyle=`rgba(${rnd()>.5?'255,255,255':'0,0,0'},${.08+rnd()*.15})`;c.fillRect(x,y,w,1.5+rnd()*1.5)}
+const tex=new THREE.CanvasTexture(tc);tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.repeat.set(5,6);tex.anisotropy=8;
+
+const W=3.3,H=4.3;const geo=new THREE.PlaneGeometry(W,H,90,110);
+const U={uT:{value:0},uWind:{value:0},uMx:{value:0}};
+const mat=new THREE.MeshPhysicalMaterial({color:new THREE.Color('#24305C'),map:tex,bumpMap:tex,bumpScale:1.2,roughness:.96,sheen:.25,sheenRoughness:.8,envMapIntensity:.45,sheenColor:new THREE.Color('#d8dbe6'),side:THREE.DoubleSide});
+mat.onBeforeCompile=sh=>{Object.assign(sh.uniforms,U);
+  sh.vertexShader=sh.vertexShader.replace('#include <common>',`#include <common>
+uniform float uT;uniform float uWind;uniform float uMx;
+vec3 cloth(vec3 p){float t=clamp((${(H/2).toFixed(3)}-p.y)/${H.toFixed(3)},0.,1.);float a=pow(t,1.25);
+ float w=sin(p.x*1.7+uT*1.6+p.y*.6)*.32+sin(p.y*2.3-uT*1.15+p.x*.4)*.22+sin(p.x*3.9-p.y*2.7+uT*2.1)*.07;
+ w*=1.45+uWind*.9;p.z+=a*w+a*a*(.45+uWind*.4)+sin(p.x*2.2+uT*.8)*a*.12;p.x+=a*(sin(p.y*1.4+uT*.9)*.08+uMx*.35*a);p.y+=a*a*(-.05)*(1.+uWind);return p;}`)
+  .replace('#include <beginnormal_vertex>',`vec3 c0=cloth(position);vec3 c1=cloth(position+vec3(.01,0.,0.));vec3 c2=cloth(position+vec3(0.,.01,0.));vec3 objectNormal=normalize(cross(c1-c0,c2-c0));
+  #ifdef USE_TANGENT
+  vec3 objectTangent=vec3(tangent.xyz);
+  #endif`).replace('#include <begin_vertex>','vec3 transformed=c0;');};
+const cloth=new THREE.Mesh(geo,mat);cloth.castShadow=true;cloth.customDepthMaterial=undefined;
+const rig=new THREE.Group();rig.add(cloth);
+const rod=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,W+.7,24),new THREE.MeshStandardMaterial({color:0x8a6a48,roughness:.5,metalness:.1}));rod.rotation.z=Math.PI/2;rod.position.y=H/2+.03;rig.add(rod);
+[-1,1].forEach(s=>{const k=new THREE.Mesh(new THREE.SphereGeometry(.1,24,24),rod.material);k.position.set(s*(W/2+.38),H/2+.03,0);rig.add(k)});
+for(let i=0;i<7;i++){const ring=new THREE.Mesh(new THREE.TorusGeometry(.085,.016,10,30),new THREE.MeshStandardMaterial({color:0xb9a27f,metalness:.7,roughness:.3}));ring.position.set(-W/2+.1+i*(W-.2)/6,H/2+.03,0);rig.add(ring)}
+scene.add(rig);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.ShadowMaterial({opacity:.12}));floor.rotation.x=-Math.PI/2;floor.position.y=-H/2-.6;floor.receiveShadow=true;scene.add(floor);
+
+let target=new THREE.Color('#24305C');addEventListener('colourway',e=>{target=new THREE.Color(e.detail);U.uWind.value+=1.2});
+function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;
+  const fit=Math.max((H+1.6)/(2*Math.tan(THREE.MathUtils.degToRad(15))),(W+1.6)/(2*Math.tan(THREE.MathUtils.degToRad(15))*camera.aspect));camera.position.z=fit;camera.updateProjectionMatrix()}
+new ResizeObserver(size).observe(stage);size();
+let mx=0,cmx=0,lastX=null,gust=0;
+stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;if(lastX!==null)gust=Math.min(2.5,gust+Math.abs(x-lastX)*6);lastX=x;mx=x});
+stage.addEventListener('pointerleave',()=>{mx=0;lastX=null});
+let vis=true;new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(stage);
+const clock=new THREE.Clock(),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function f(){requestAnimationFrame(f);if(!vis)return;const t=reduce?0:clock.getElapsedTime();U.uT.value=t;
+  gust*=.96;U.uWind.value+=((.15+gust)-U.uWind.value)*.04;cmx+=(mx-cmx)*.05;U.uMx.value=cmx;
+  mat.color.lerp(target,.06);rig.rotation.y=-.42+cmx*.35+Math.sin(t*.3)*.06;rig.rotation.x=.04;renderer.render(scene,camera)})();
+document.documentElement.classList.add('gl-ready');
+</script>
+</body>
+</html>

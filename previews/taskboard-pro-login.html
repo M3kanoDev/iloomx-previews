@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in — TaskBoard Pro</title>
+<meta name="description" content="Log in to your TaskBoard Pro workspace.">
+<meta name="theme-color" content="#070912">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070912;--panel:#0E1224;--line:rgba(160,170,255,.14);--line2:rgba(160,170,255,.26);--text:#EEF0FF;--muted:#8D93B8;--cyan:#22D3EE;--mint:#2EE6A6;--coral:#FF5C7A;--amber:#FFB547;
+  --grad:linear-gradient(100deg,#8B7BFF 0%,#5B8CFF 45%,#22D3EE 100%);--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Geist',system-ui,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.5;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.layout{display:grid;grid-template-columns:minmax(420px,560px) 1fr;min-height:100vh}
+.formside{display:flex;flex-direction:column;padding:32px 56px;position:relative;z-index:2;background:radial-gradient(80% 50% at 0% 0%,rgba(109,91,255,.12),transparent 70%),var(--bg)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:3px;padding:7px;box-shadow:0 6px 20px -6px rgba(109,91,255,.9)}
+.mark i{background:#fff;border-radius:2px}.mark i:nth-child(1){height:100%}.mark i:nth-child(2){height:55%}.mark i:nth-child(3){height:78%}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top a.back{font-size:14px;color:var(--muted)}
+.top a.back:hover{color:var(--text)}
+.box{margin:auto 0;width:100%;max-width:400px;align-self:center;padding:40px 0}
+h1{font-family:var(--display);font-size:40px;font-weight:800;letter-spacing:-.035em;line-height:1}
+.lead{color:var(--muted);margin:12px 0 28px}
+.seg{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);margin-bottom:24px;position:relative}
+.seg button{position:relative;z-index:1;padding:9px;border-radius:9px;font-weight:500;color:var(--muted);transition:color .3s}
+.seg button[aria-selected="true"]{color:#0A0C18}
+.seg .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:var(--text);transition:transform .45s var(--ease)}
+.seg.signup .pill{transform:translateX(100%)}
+.sso{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sso button{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.03);font-weight:500;transition:background .3s,border-color .3s}
+.sso button:hover{background:rgba(255,255,255,.08)}
+.sso svg{width:18px;height:18px}
+.or{display:flex;align-items:center;gap:14px;margin:22px 0;font-size:13px;color:var(--muted)}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.field{display:block;margin-bottom:14px}
+.field .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:7px}
+.field .lbl a{color:var(--cyan);font-weight:400}
+.inp{position:relative}
+.inp input{width:100%;font:inherit;font-size:15px;color:var(--text);padding:13px 14px 13px 42px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.03);transition:border-color .25s,box-shadow .25s,background .25s}
+.inp input::placeholder{color:#5d6390}
+.inp input:focus{outline:none;border-color:#7C8CFF;background:rgba(124,140,255,.06);box-shadow:0 0 0 4px rgba(124,140,255,.16)}
+.inp svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted)}
+.inp .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+.inp .eye:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.field.bad input{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,92,122,.14)}
+.err{display:block;font-size:12.5px;color:#FF8FA3;margin-top:6px;min-height:0}
+.meter{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.meter i{height:4px;border-radius:4px;background:rgba(255,255,255,.08);transition:background .3s}
+.meter small{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 22px;font-size:14px}
+.check{display:flex;align-items:center;gap:9px;cursor:pointer;color:var(--muted)}
+.check input{appearance:none;width:18px;height:18px;border-radius:6px;border:1px solid var(--line2);background:rgba(255,255,255,.03);display:grid;place-items:center;cursor:pointer}
+.check input:checked{background:var(--grad);border-color:transparent}
+.check input:checked::after{content:"✓";font-size:12px;color:#fff;font-weight:700}
+.submit{width:100%;position:relative;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:12px;font-weight:600;font-size:15px;background:var(--text);color:#0A0C18;box-shadow:0 10px 40px -10px rgba(109,91,255,.8);transition:transform .3s var(--ease),box-shadow .3s}
+.submit:hover{transform:translateY(-1px);box-shadow:0 14px 50px -10px rgba(34,211,238,.7)}
+.submit:disabled{opacity:.7;cursor:wait;transform:none}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(10,12,24,.25);border-top-color:#0A0C18;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.alert{display:flex;gap:10px;padding:12px 14px;border-radius:12px;font-size:13.5px;margin-bottom:16px}
+.alert.bad{background:rgba(255,92,122,.1);border:1px solid rgba(255,92,122,.3);color:#FFB3C1}
+.alert.ok{background:rgba(46,230,166,.1);border:1px solid rgba(46,230,166,.3);color:#A6F5D8}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.demo{margin-top:20px;padding:14px 16px;border-radius:14px;border:1px dashed var(--line2);background:rgba(34,211,238,.04);font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.demo b{color:var(--text);font-weight:500}
+.demo button{flex:none;padding:8px 12px;border-radius:9px;background:rgba(34,211,238,.12);color:var(--cyan);font-weight:500;font-size:13px}
+.demo button:hover{background:rgba(34,211,238,.2)}
+.legal{font-size:12.5px;color:var(--muted);margin-top:22px;text-align:center}
+.legal a{text-decoration:underline;text-underline-offset:2px}
+.foot{display:flex;justify-content:space-between;font-size:13px;color:#5d6390}
+
+/* visual side */
+.visual{position:relative;overflow:hidden;background:radial-gradient(60% 60% at 70% 30%,rgba(109,91,255,.35),transparent 70%),radial-gradient(50% 50% at 20% 90%,rgba(34,211,238,.2),transparent 70%),#0A0D1C;border-left:1px solid var(--line)}
+#scene{position:absolute;inset:0;width:100%;height:100%}
+.visual .grid{position:absolute;inset:0;background:linear-gradient(rgba(160,170,255,.06) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,rgba(160,170,255,.06) 1px,transparent 1px) 0 0/56px 56px;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.quote{position:absolute;left:48px;right:48px;bottom:48px;max-width:560px;padding:26px 28px;border-radius:22px;border:1px solid var(--line2);background:rgba(14,18,36,.55);backdrop-filter:blur(18px) saturate(1.4);z-index:2}
+.quote p{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-.015em;line-height:1.3}
+.quote footer{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:14px}
+.quote footer small{display:block;color:var(--muted)}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13px;background:linear-gradient(135deg,#8B7BFF,#22D3EE)}
+.stat{position:absolute;top:48px;right:48px;z-index:2;padding:14px 18px;border-radius:16px;border:1px solid var(--line2);background:rgba(14,18,36,.55);backdrop-filter:blur(16px);font-size:13px;color:var(--muted)}
+.stat b{display:block;font-family:var(--display);font-size:28px;color:var(--text);letter-spacing:-.02em}
+.stat b span{color:var(--mint);font-size:14px;font-family:var(--body);font-weight:500;margin-left:6px}
+
+@media (max-width:980px){.layout{grid-template-columns:1fr}.visual{display:none}.formside{padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.ilx{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:250;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-radius:999px;background:rgba(15,11,28,.82);backdrop-filter:blur(16px);border:1px solid rgba(183,156,255,.25);color:#E9E6F5;font:500 13px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 18px 50px -12px rgba(0,0,0,.6);white-space:nowrap}
+.ilx b{background:linear-gradient(90deg,#B79CFF,#22D3EE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.ilx a{color:#fff;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08)}
+.ilx a.go{background:linear-gradient(90deg,#8B5CF6,#06B6D4)}
+.ilx button{color:#9d97b6;font-size:18px;padding:0 6px;background:none;border:0;cursor:pointer}
+@media (max-width:560px){.ilx .t{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="formside">
+    <div class="top"><a class="logo" href="/preview/taskboard-pro"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>TaskBoard Pro</a><a class="back" href="/preview/taskboard-pro">← Back to site</a></div>
+
+    <div class="box" id="box">
+      <!-- auth view -->
+      <div id="authView">
+        <h1 id="title">Welcome back</h1>
+        <p class="lead" id="lead">Log in to pick up where your team left off.</p>
+        <div class="seg" id="seg" role="tablist"><span class="pill" aria-hidden="true"></span>
+          <button role="tab" aria-selected="true" data-mode="login">Log in</button>
+          <button role="tab" aria-selected="false" data-mode="signup">Sign up</button>
+        </div>
+        <div class="sso">
+          <button type="button" data-sso="Google"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12h8"/></svg>Google</button>
+          <button type="button" data-sso="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</button>
+        </div>
+        <div class="or">or continue with email</div>
+        <form id="form" novalidate>
+          <div id="alert" hidden></div>
+          <label class="field" id="fName" hidden><span class="lbl">Full name</span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><input name="name" autocomplete="name" placeholder="Sofia Marin"></span><span class="err"></span></label>
+          <label class="field" id="fEmail"><span class="lbl">Work email</span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg><input name="email" type="email" autocomplete="email" placeholder="you@company.com"></span><span class="err"></span></label>
+          <label class="field" id="fPass"><span class="lbl"><span>Password</span><a href="#" id="forgotLink">Forgot password?</a></span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input name="password" type="password" autocomplete="current-password" placeholder="••••••••"><button type="button" class="eye" id="eye">Show</button></span><span class="err"></span>
+            <span class="meter" id="meter" hidden><i></i><i></i><i></i><i></i><small id="meterTxt">Use 8+ characters with a number and a symbol.</small></span></label>
+          <div class="row" id="rememberRow"><label class="check"><input type="checkbox" checked> Remember me for 30 days</label></div>
+          <button class="submit" id="submit" type="submit">Log in</button>
+        </form>
+        <div class="demo" id="demoBox"><span>Demo account<br><b>demo@taskboard.pro</b> · <b>demo1234</b></span><button type="button" id="fillDemo">Fill in</button></div>
+        <p class="legal" id="legal" hidden>By signing up you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+      </div>
+
+      <!-- reset view -->
+      <div id="resetView" hidden>
+        <h1>Reset password</h1>
+        <p class="lead">Enter your email and we'll send you a secure link to set a new password.</p>
+        <form id="resetForm" novalidate>
+          <div id="resetAlert" hidden></div>
+          <label class="field" id="fReset"><span class="lbl">Email</span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg><input name="email" type="email" placeholder="you@company.com"></span><span class="err"></span></label>
+          <button class="submit" type="submit">Send reset link</button>
+        </form>
+        <p class="legal"><a href="#" id="backLogin">← Back to log in</a></p>
+      </div>
+    </div>
+
+    <div class="foot"><span>© 2026 TaskBoard Pro</span><span>Privacy · Terms · Status</span></div>
+  </div>
+
+  <div class="visual" aria-hidden="true">
+    <div class="grid"></div>
+    <canvas id="scene"></canvas>
+    <div class="stat">Tasks shipped this week<b>12,480<span>↑ 18%</span></b></div>
+    <div class="quote"><p>"We moved 14 boards from Jira in an afternoon. Our standups went from 30 minutes to 10."</p><footer><span class="av">LM</span><span>Laura Mei<small>Head of Product, Lumen</small></span></footer></div>
+  </div>
+</div>
+
+<div class="ilx" role="note"><span class="t">Demo by <b>iLoomX</b></span><a href="/preview">All projects</a><a class="go" href="/">Start a project</a><button aria-label="Hide this bar" onclick="this.parentElement.remove()">×</button></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const form=$('#form'),seg=$('#seg');let mode=new URLSearchParams(location.search).has('signup')?'signup':'login';
+function setMode(m){mode=m;seg.classList.toggle('signup',m==='signup');
+  seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===m));
+  const su=m==='signup';$('#fName').hidden=!su;$('#meter').hidden=!su;$('#legal').hidden=!su;$('#rememberRow').hidden=su;$('#demoBox').hidden=su;$('#forgotLink').hidden=su;
+  $('#title').textContent=su?'Create your workspace':'Welcome back';
+  $('#lead').textContent=su?'Free for up to 5 people. No credit card needed.':'Log in to pick up where your team left off.';
+  $('#submit').textContent=su?'Create account':'Log in';form.password.autocomplete=su?'new-password':'current-password';
+  clearErrors();$('#alert').hidden=true;}
+seg.querySelectorAll('button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));setMode(mode);
+
+$('#eye').onclick=()=>{const p=form.password;const show=p.type==='password';p.type=show?'text':'password';$('#eye').textContent=show?'Hide':'Show'};
+$('#fillDemo').onclick=()=>{form.email.value='demo@taskboard.pro';form.password.value='demo1234';clearErrors();form.email.dispatchEvent(new Event('input'))};
+
+// strength meter
+form.password.addEventListener('input',()=>{if(mode!=='signup')return;const v=form.password.value;let s=0;
+  if(v.length>=8)s++;if(/[A-Z]/.test(v)&&/[a-z]/.test(v))s++;if(/\d/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
+  const cols=['#FF5C7A','#FFB547','#5B8CFF','#2EE6A6'],txt=['Too weak','Could be stronger','Good','Strong password'];
+  document.querySelectorAll('#meter i').forEach((i,k)=>i.style.background=k<s?cols[s-1]:'');$('#meterTxt').textContent=v?txt[Math.max(s-1,0)]:'Use 8+ characters with a number and a symbol.'});
+
+function fieldErr(id,msg){const f=$(id);f.classList.add('bad');f.querySelector('.err').textContent=msg}
+function clearErrors(){document.querySelectorAll('.field').forEach(f=>{f.classList.remove('bad');f.querySelector('.err').textContent=''})}
+form.addEventListener('input',e=>{const f=e.target.closest('.field');if(f){f.classList.remove('bad');f.querySelector('.err').textContent=''}});
+function alertBox(el,kind,msg){el.className='alert '+kind;el.innerHTML=(kind==='bad'?'⚠ ':'✓ ')+msg;el.hidden=false}
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+function busy(btn,on,label){btn.disabled=on;btn.innerHTML=on?'<span class="spin"></span>'+label:label}
+function enterApp(name){try{localStorage.setItem('tbp-user',JSON.stringify({name,email:form.email.value||'demo@taskboard.pro'}))}catch(e){}
+  location.href='/preview/taskboard-pro/app'}
+
+form.addEventListener('submit',e=>{e.preventDefault();clearErrors();$('#alert').hidden=true;let ok=true;
+  const email=form.email.value.trim(),pw=form.password.value;
+  if(mode==='signup'&&form.name.value.trim().length<2){fieldErr('#fName','Enter your name.');ok=false}
+  if(!emailOk(email)){fieldErr('#fEmail',email?'That email doesn\'t look right.':'Enter your email.');ok=false}
+  if(pw.length<(mode==='signup'?8:1)){fieldErr('#fPass',mode==='signup'?'Use at least 8 characters.':'Enter your password.');ok=false}
+  if(!ok){$('#box').classList.remove('shake');void $('#box').offsetWidth;$('#box').classList.add('shake');return}
+  const btn=$('#submit');busy(btn,true,mode==='signup'?'Creating workspace…':'Logging in…');
+  setTimeout(()=>{
+    if(mode==='login'&&!(email==='demo@taskboard.pro'&&pw==='demo1234')){busy(btn,false,'Log in');
+      alertBox($('#alert'),'bad','Wrong email or password. Use the demo account below to try it.');$('#box').classList.remove('shake');void $('#box').offsetWidth;$('#box').classList.add('shake');return}
+    btn.innerHTML='✓ '+(mode==='signup'?'Workspace ready':'Welcome back');
+    setTimeout(()=>enterApp(mode==='signup'?form.name.value.trim():'Demo User'),500);
+  },1100)});
+
+document.querySelectorAll('[data-sso]').forEach(b=>b.onclick=()=>{const t=b.innerHTML;b.innerHTML='<span class="spin" style="border-color:rgba(255,255,255,.25);border-top-color:#fff"></span>Connecting…';
+  setTimeout(()=>{b.innerHTML=t;enterApp('Demo User')},1200)});
+
+// reset flow
+$('#forgotLink').onclick=e=>{e.preventDefault();$('#authView').hidden=true;$('#resetView').hidden=false;$('#resetForm').email.value=form.email.value};
+$('#backLogin').onclick=e=>{e.preventDefault();$('#resetView').hidden=true;$('#authView').hidden=false};
+$('#resetForm').addEventListener('submit',e=>{e.preventDefault();const f=$('#fReset'),v=e.target.email.value.trim();f.classList.remove('bad');f.querySelector('.err').textContent='';
+  if(!emailOk(v)){f.classList.add('bad');f.querySelector('.err').textContent='Enter a valid email.';return}
+  const btn=e.target.querySelector('.submit');busy(btn,true,'Sending…');setTimeout(()=>{busy(btn,false,'Send reset link');alertBox($('#resetAlert'),'ok',`Check your inbox. We sent a link to <b>${v.replace(/</g,'&lt;')}</b>. It expires in 30 minutes.`)},1000)});
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('scene');if(getComputedStyle(canvas.parentElement).display==='none'){/* hidden on mobile */}
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.toneMapping=THREE.ACESFilmicToneMapping;
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(38,1,.1,100);camera.position.set(0,0,13);
+scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(),.04).texture;
+scene.add(new THREE.AmbientLight(0x8890ff,.6));const dl=new THREE.DirectionalLight(0xffffff,1.4);dl.position.set(4,6,8);scene.add(dl);
+const pl=new THREE.PointLight(0x22d3ee,60,30);pl.position.set(-6,-3,4);scene.add(pl);
+
+const TAGS={Design:['#C4B5FD','rgba(167,139,250,.22)'],Development:['#93B4FF','rgba(91,140,255,.22)'],Bug:['#FF9AAE','rgba(255,92,122,.22)'],Ops:['#FFCF85','rgba(255,181,71,.22)'],Marketing:['#7FF0C6','rgba(46,230,166,.2)']};
+const CARDS=[['Design','Pricing page hero','SM','#6D5BFF','Oct 24',.0],['Development','Checkout API with Stripe','JL','#14B8A6','Oct 21',.6],['Bug','Safari login redirect','AR','#FF5C7A','Oct 22',.0],
+ ['Ops','SSL & CDN configured','KO','#F59E0B','Done',1],['Marketing','Launch email sequence','KO','#F59E0B','Oct 29',.2],['Design','Mobile navigation','SM','#6D5BFF','Oct 23',.4],
+ ['Development','Users table migration','JL','#14B8A6','Done',1],['Bug','Fix dark mode contrast','AR','#FF5C7A','Oct 25',.1],['Development','Webhooks retry queue','JL','#14B8A6','Oct 30',.3]];
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function cardTexture([tag,title,who,col,due,prog]){
+  const W=640,H=360,cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');
+  c.font='600 26px Geist, system-ui, sans-serif';const tw=c.measureText(tag).width;
+  c.fillStyle=TAGS[tag][1];rr(c,40,38,tw+36,46,12);c.fill();c.fillStyle=TAGS[tag][0];c.fillText(tag,58,70);
+  c.fillStyle='#EEF0FF';c.font='600 40px Geist, system-ui, sans-serif';c.fillText(title,40,150,560);
+  c.fillStyle='rgba(255,255,255,.08)';rr(c,40,196,560,12,6);c.fill();
+  if(prog>0){const g=c.createLinearGradient(40,0,600,0);g.addColorStop(0,'#8B7BFF');g.addColorStop(1,'#22D3EE');c.fillStyle=prog>=1?'#2EE6A6':g;rr(c,40,196,560*prog,12,6);c.fill()}
+  c.fillStyle='#8D93B8';c.font='500 26px Geist, system-ui, sans-serif';c.fillText(prog>=1?'✓ Done':'Due '+due,40,300);
+  c.fillStyle=col;c.beginPath();c.arc(568,290,30,0,Math.PI*2);c.fill();c.fillStyle='#fff';c.font='700 22px Geist, system-ui, sans-serif';c.textAlign='center';c.fillText(who,568,298);
+  const t=new THREE.CanvasTexture(cv);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t}
+const boxGeo=new RoundedBoxGeometry(3.2,1.8,.12,6,.16),planeGeo=new THREE.PlaneGeometry(3.2,1.8);
+const boxMat=new THREE.MeshPhysicalMaterial({color:0x151a33,roughness:.35,metalness:.2,clearcoat:1,clearcoatRoughness:.2,envMapIntensity:.8});
+const group=new THREE.Group();scene.add(group);const items=[];
+CARDS.forEach((d,i)=>{const g=new THREE.Group();const b=new THREE.Mesh(boxGeo,boxMat);g.add(b);
+  const face=new THREE.Mesh(planeGeo,new THREE.MeshBasicMaterial({map:cardTexture(d),transparent:true}));face.position.z=.065;g.add(face);
+  const col=i%3,row=Math.floor(i/3);g.position.set((col-1)*3.7+(row%2?.6:-.4),(1-row)*2.3+(col-1)*.35,-row*1.4+(col===1?.8:0));
+  g.rotation.set(-.12+row*.05,-.35+col*.28,-.04+col*.03);g.userData={base:g.position.clone(),rot:g.rotation.clone(),ph:i*.7};group.add(g);items.push(g)});
+group.rotation.set(.18,-.28,0);
+function size(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.position.z=w/h<1?17:13;camera.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+let mx=0,my=0,cx=0,cy=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+const clock=new THREE.Clock(),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function f(){requestAnimationFrame(f);if(!canvas.clientWidth)return;const t=reduce?0:clock.getElapsedTime();cx+=(mx-cx)*.05;cy+=(my-cy)*.05;
+  group.rotation.y=-.28+cx*.5;group.rotation.x=.18+cy*.35;
+  items.forEach(g=>{const u=g.userData;g.position.y=u.base.y+Math.sin(t*.8+u.ph)*.18;g.rotation.z=u.rot.z+Math.sin(t*.5+u.ph)*.03;g.rotation.x=u.rot.x+Math.cos(t*.6+u.ph)*.04});
+  renderer.render(scene,camera)})();
+</script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TaskBoard Pro — Plan, track and ship together</title>
+<meta name="description" content="TaskBoard Pro is the fast workspace for product teams. Boards, sprints, time tracking and reports in one place.">
+<meta name="theme-color" content="#070912">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070912;--bg2:#0B0E1A;--panel:#10142A;--panel2:#151A33;--line:rgba(160,170,255,.12);--line2:rgba(160,170,255,.22);
+  --text:#EEF0FF;--muted:#8D93B8;--indigo:#6D5BFF;--cyan:#22D3EE;--mint:#2EE6A6;--amber:#FFB547;--coral:#FF5C7A;--violet:#A78BFA;
+  --grad:linear-gradient(100deg,#8B7BFF 0%,#5B8CFF 45%,#22D3EE 100%);
+  --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Geist',system-ui,sans-serif;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.035em;line-height:.98}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:500;font-size:15px;padding:13px 22px;border-radius:12px;transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s;white-space:nowrap}
+.btn.primary{background:var(--text);color:#0A0C18;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 10px 40px -10px rgba(109,91,255,.8)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.3),0 16px 50px -10px rgba(34,211,238,.7)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03);backdrop-filter:blur(10px)}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn .k{font-size:12px;padding:2px 7px;border-radius:6px;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.12)}
+
+/* nav */
+.nav{position:fixed;inset:14px 0 auto;z-index:50}
+.nav .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 10px 10px 18px;border-radius:18px;border:1px solid transparent;transition:background .4s,border-color .4s,backdrop-filter .4s}
+.nav.scrolled .bar{background:rgba(11,14,26,.7);backdrop-filter:blur(18px) saturate(1.5);border-color:var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:3px;padding:7px;box-shadow:0 6px 20px -6px rgba(109,91,255,.9)}
+.mark i{background:#fff;border-radius:2px}.mark i:nth-child(1){height:100%}.mark i:nth-child(2){height:55%}.mark i:nth-child(3){height:78%}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:14px;color:var(--muted)}
+.nav ul a:hover{color:var(--text)}
+.nav .act{display:flex;gap:8px}
+.nav .btn{padding:10px 16px;font-size:14px}
+
+/* hero */
+.hero{position:relative;padding:170px 0 0;text-align:center;overflow:hidden}
+#waves{position:absolute;left:0;right:0;top:0;height:900px;width:100%;z-index:0;opacity:.95}
+.hero::before{content:"";position:absolute;inset:0 0 auto;height:900px;z-index:1;pointer-events:none;background:radial-gradient(60% 50% at 50% 0%,rgba(109,91,255,.25),transparent 70%),linear-gradient(to bottom,transparent 55%,var(--bg) 92%)}
+.hero .wrap{position:relative;z-index:2}
+.pill{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);padding:6px 14px 6px 6px;border-radius:999px;border:1px solid var(--line2);background:rgba(16,20,42,.6);backdrop-filter:blur(10px)}
+.pill b{padding:3px 10px;border-radius:999px;background:var(--grad);color:#fff;font-weight:600;font-size:12px}
+.pill:hover{border-color:var(--violet);color:var(--text)}
+.hero h1{font-size:clamp(50px,8.4vw,124px);font-weight:800;max-width:1100px;margin:28px auto 26px}
+.hero h1 .w{display:inline-block}
+.hero p.sub{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:640px;margin:0 auto 36px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.trust-line{margin-top:22px;font-size:13px;color:var(--muted);display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.trust-line span::before{content:"✓ ";color:var(--mint)}
+
+/* 3d mockup */
+.stage{perspective:1800px;margin:80px auto 0;max-width:1180px;position:relative;z-index:2}
+.stage::before{content:"";position:absolute;inset:8% 10% -10%;background:var(--grad);filter:blur(90px);opacity:.35;z-index:-1;border-radius:50%}
+.mock{transform-origin:50% 0;transform:rotateX(24deg) scale(.94);border-radius:22px;border:1px solid var(--line2);background:linear-gradient(180deg,rgba(21,26,51,.95),rgba(11,14,26,.98));box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 60px 120px -40px rgba(0,0,0,.9);overflow:hidden;text-align:left;will-change:transform}
+.mock .chrome{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.mock .chrome i{width:11px;height:11px;border-radius:50%;background:#2a2f52}
+.mock .chrome .url{margin:0 auto;font-size:12px;color:var(--muted);padding:5px 40px;border-radius:8px;background:rgba(255,255,255,.04)}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:520px}
+.side{border-right:1px solid var(--line);padding:16px 12px;font-size:13px;color:var(--muted)}
+.side .ws{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:600;padding:6px 8px;margin-bottom:14px}
+.side .ws i{width:22px;height:22px;border-radius:7px;background:var(--grad)}
+.side a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px}
+.side a.on{background:rgba(255,255,255,.06);color:var(--text)}
+.side small{display:block;margin:18px 10px 6px;font-size:11px;color:#5d6390}
+.side .dot{width:8px;height:8px;border-radius:3px}
+.main{padding:18px 20px;position:relative}
+.main .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.main .top h4{font-family:var(--display);font-size:20px;letter-spacing:-.02em}
+.main .top .people{display:flex}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;color:#fff;border:2px solid var(--panel);flex:none}
+.people .av{margin-left:-8px}
+.kb{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kcol{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;padding:10px;min-height:380px}
+.kcol header{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;padding:2px 4px 10px}
+.kcol header span{display:flex;align-items:center;gap:8px}
+.kcol header i{width:8px;height:8px;border-radius:50%}
+.kcol header em{font-style:normal;font-size:11px;color:var(--muted);padding:1px 8px;border-radius:999px;background:rgba(255,255,255,.06)}
+.klist{display:grid;gap:8px}
+.kc{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px;font-size:13px}
+.kc .t{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:6px;margin-bottom:7px}
+.kc p{font-weight:500;line-height:1.35}
+.kc footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11px;color:var(--muted)}
+.kc footer .av{width:22px;height:22px;font-size:9px;border-width:0}
+.kc.glow{box-shadow:0 0 0 1px var(--cyan),0 10px 30px -8px rgba(34,211,238,.6)}
+.t-design{background:rgba(167,139,250,.16);color:#C4B5FD}.t-dev{background:rgba(91,140,255,.16);color:#93B4FF}.t-bug{background:rgba(255,92,122,.16);color:#FF9AAE}.t-ops{background:rgba(255,181,71,.16);color:#FFCF85}.t-mkt{background:rgba(46,230,166,.14);color:#7FF0C6}
+.fake-cursor{position:absolute;left:0;top:0;width:22px;height:22px;z-index:5;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.toast-mini{position:absolute;right:20px;bottom:20px;font-size:12px;padding:10px 14px;border-radius:12px;background:rgba(46,230,166,.12);border:1px solid rgba(46,230,166,.35);color:#9FF5D5;opacity:0;transform:translateY(10px);transition:.5s var(--ease)}
+.toast-mini.on{opacity:1;transform:none}
+
+/* logos */
+.logos{padding:90px 0 40px;text-align:center;color:var(--muted);font-size:14px}
+.marq{overflow:hidden;margin-top:26px;mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.marq .tr{display:inline-flex;gap:70px;animation:mq 30s linear infinite;font-family:var(--display);font-weight:700;font-size:26px;color:#4B5180;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding:130px 0;position:relative}
+.sh{text-align:center;max-width:760px;margin:0 auto 70px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:500;color:var(--cyan);padding:5px 12px;border-radius:999px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);margin-bottom:22px}
+.sh h2{font-size:clamp(40px,5.6vw,78px);font-weight:800}
+.sh p{color:var(--muted);font-size:18px;margin-top:20px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{position:relative;overflow:hidden;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(21,26,51,.7),rgba(11,14,26,.7));padding:28px;min-height:300px;display:flex;flex-direction:column;gap:22px;transform-style:preserve-3d;transition:border-color .4s}
+.tile::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(109,91,255,.18),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.tile:hover{border-color:var(--line2)}
+.tile:hover::before{opacity:1}
+.tile h3{font-size:26px;font-weight:700}
+.tile p{color:var(--muted);font-size:15px;max-width:420px}
+.t1{grid-column:span 4}.t2{grid-column:span 2}.t3{grid-column:span 2}.t4{grid-column:span 2}.t5{grid-column:span 2}
+.vis{flex:1;display:flex;align-items:flex-end;position:relative}
+/* sprint vis */
+.sprint{width:100%;display:grid;gap:8px}
+.srow{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:12px;font-size:12px;color:var(--muted)}
+.sbar{height:24px;border-radius:7px;background:rgba(255,255,255,.04);position:relative;overflow:hidden}
+.sbar i{position:absolute;top:0;bottom:0;border-radius:7px;background:var(--grad);transform-origin:left}
+/* ring */
+.ring{width:150px;height:150px;margin:auto;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:38px}
+/* bars */
+.bars{display:flex;align-items:flex-end;gap:8px;height:130px;width:100%}
+.bars i{flex:1;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#5B8CFF,rgba(91,140,255,.15));transform-origin:bottom}
+.bars i.hi{background:var(--grad)}
+.timer{font-family:var(--display);font-size:54px;font-weight:700;letter-spacing:-.03em}
+.timer small{display:block;font-family:var(--body);font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0}
+.kbd{display:flex;gap:6px;flex-wrap:wrap}
+.kbd span{font-size:13px;padding:6px 11px;border-radius:9px;border:1px solid var(--line2);border-bottom-width:3px;background:rgba(255,255,255,.03)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{padding:30px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.02);counter-increment:s}
+.step::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--display);font-weight:800;font-size:64px;line-height:1;margin-bottom:28px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:.9}
+.step h3{font-size:24px;margin-bottom:10px}
+.step p{color:var(--muted);font-size:15px}
+
+/* integrations orbit */
+.orbit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.orbit{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin:auto}
+.orbit .ring-o{position:absolute;inset:0;border-radius:50%;border:1px dashed var(--line2);animation:rot 40s linear infinite}
+.orbit .ring-o.r2{inset:18%;animation-duration:28s;animation-direction:reverse}
+.orbit .chip{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-weight:700;font-size:15px;background:var(--panel2);border:1px solid var(--line2);box-shadow:0 10px 30px -10px rgba(0,0,0,.8)}
+.orbit .chip{animation:unrot 40s linear infinite}
+.orbit .r2 .chip{animation-duration:28s;animation-direction:reverse}
+@keyframes unrot{to{rotate:-360deg}}
+.orbit .core{position:absolute;inset:38%;border-radius:28px;background:var(--grad);display:grid;place-items:center;box-shadow:0 0 80px rgba(109,91,255,.6)}
+.orbit .core .mark{width:56%;height:56%;background:rgba(255,255,255,.12);box-shadow:none;padding:12%;border-radius:12px}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* pricing */
+.toggle{display:inline-flex;padding:4px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);margin-bottom:40px}
+.toggle button{padding:9px 18px;border-radius:9px;font-size:14px;color:var(--muted)}
+.toggle button[aria-pressed="true"]{background:var(--text);color:#0A0C18}
+.toggle small{color:var(--mint);margin-left:6px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
+.plan{padding:32px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.02);display:flex;flex-direction:column}
+.plan.pop{background:linear-gradient(180deg,rgba(109,91,255,.18),rgba(11,14,26,.4));border-color:rgba(139,123,255,.5);position:relative}
+.plan.pop::after{content:"Most popular";position:absolute;top:24px;right:24px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--grad)}
+.plan h3{font-size:24px}
+.plan .d{color:var(--muted);font-size:15px;margin:8px 0 26px}
+.plan .price{font-family:var(--display);font-size:60px;font-weight:800;line-height:1;letter-spacing:-.04em}
+.plan .price small{font-family:var(--body);font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0}
+.plan ul{list-style:none;display:grid;gap:12px;margin:28px 0 32px;font-size:15px;flex:1}
+.plan li{display:flex;gap:10px;color:#cfd3f2}
+.plan li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:rgba(46,230,166,.14);color:var(--mint);margin-top:2px}
+
+/* testimonials */
+.quotes{columns:3;column-gap:16px}
+.q{break-inside:avoid;margin-bottom:16px;padding:26px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.q p{font-size:16px;color:#d6d9f5;margin-bottom:20px}
+.q footer{display:flex;align-items:center;gap:12px;font-size:14px}
+.q footer small{display:block;color:var(--muted);font-size:13px}
+
+/* faq */
+.faq{max-width:820px;margin:auto}
+.faq details{border-bottom:1px solid var(--line);padding:22px 4px}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-size:18px;font-weight:500}
+.faq summary::after{content:"+";font-size:24px;line-height:1;color:var(--cyan);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:12px}
+
+/* final cta */
+.final{position:relative;overflow:hidden;border-radius:36px;padding:110px 30px;text-align:center;border:1px solid var(--line2);background:radial-gradient(60% 80% at 50% 120%,rgba(109,91,255,.55),transparent 70%),radial-gradient(40% 50% at 90% 0%,rgba(34,211,238,.25),transparent 70%),var(--bg2)}
+.final h2{font-size:clamp(42px,6vw,88px);font-weight:800;max-width:900px;margin:0 auto 20px}
+.final p{color:var(--muted);font-size:18px;margin-bottom:34px}
+footer.site{padding:60px 0 110px;color:var(--muted);font-size:14px}
+footer.site .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+footer.site nav{display:flex;gap:24px}
+footer.site a:hover{color:var(--text)}
+
+@media (max-width:1000px){
+  .nav ul{display:none}
+  .app{grid-template-columns:1fr}.side{display:none}
+  .bento{grid-template-columns:1fr 1fr}.t1{grid-column:span 2}.t2,.t3,.t4,.t5{grid-column:span 1}
+  .steps,.plans{grid-template-columns:1fr}
+  .orbit-wrap{grid-template-columns:1fr}
+  .quotes{columns:2}
+}
+@media (max-width:680px){
+  .wrap{width:calc(100% - 32px)}
+  .nav .act .ghost{display:none}
+  .hero{padding-top:130px}
+  .kb{grid-template-columns:1fr 1fr}.kb .kcol:nth-child(3){display:none}
+  .kcol{min-height:300px}
+  .bento{grid-template-columns:1fr}.t1,.t2,.t3,.t4,.t5{grid-column:span 1}
+  .quotes{columns:1}
+  section{padding:90px 0}
+  .srow{grid-template-columns:90px 1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.mock{transform:none}}
+
+/* iLoomX preview bar */
+.ilx{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:250;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-radius:999px;background:rgba(15,11,28,.82);backdrop-filter:blur(16px);border:1px solid rgba(183,156,255,.25);color:#E9E6F5;font:500 13px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 18px 50px -12px rgba(0,0,0,.6);white-space:nowrap}
+.ilx b{background:linear-gradient(90deg,#B79CFF,#22D3EE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.ilx a{color:#fff;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08)}
+.ilx a.go{background:linear-gradient(90deg,#8B5CF6,#06B6D4)}
+.ilx button{color:#9d97b6;font-size:18px;padding:0 6px;background:none;border:0;cursor:pointer}
+@media (max-width:560px){.ilx .t{display:none}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap"><div class="bar">
+    <a class="logo" href="#top"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>TaskBoard Pro</a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#integrations">Integrations</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul></nav>
+    <div class="act">
+      <a class="btn ghost" href="/preview/taskboard-pro/login">Log in</a>
+      <a class="btn primary" href="/preview/taskboard-pro/login?signup=1">Start free</a>
+    </div>
+  </div></div>
+</header>
+
+<main id="top">
+<section class="hero" id="product" style="padding-bottom:0">
+  <canvas id="waves" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <a class="pill" href="#features"><b>New</b>AI sprint planning is here</a>
+    <h1><span class="w">Ship</span> <span class="w">faster</span> <span class="w">with</span> <span class="w grad">one&nbsp;board</span> <span class="w">for</span> <span class="w">everything</span></h1>
+    <p class="sub">Tasks, sprints, docs and time tracking in a workspace so fast it feels local. Built for product teams that hate busywork.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="/preview/taskboard-pro/login?signup=1">Start free for 14 days</a>
+      <a class="btn ghost" href="/preview/taskboard-pro/app">Open live demo</a>
+    </div>
+    <div class="trust-line"><span>No credit card</span><span>Set up in 2 minutes</span><span>Free for 5 users</span></div>
+
+    <div class="stage">
+      <div class="mock" id="mock">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">app.taskboard.pro/website-relaunch</span></div>
+        <div class="app">
+          <aside class="side">
+            <div class="ws"><i></i>Northwind</div>
+            <a class="on">▦ Board</a><a>◷ Timeline</a><a>☰ List</a><a>◔ Reports</a>
+            <small>Projects</small>
+            <a><span class="dot" style="background:#8B7BFF"></span>Website relaunch</a>
+            <a><span class="dot" style="background:#22D3EE"></span>Mobile app 2.0</a>
+            <a><span class="dot" style="background:#2EE6A6"></span>Growth Q4</a>
+          </aside>
+          <div class="main">
+            <div class="top"><h4>Sprint 14 · Website relaunch</h4>
+              <div class="people"><span class="av" style="background:#6D5BFF">SM</span><span class="av" style="background:#FF5C7A">AR</span><span class="av" style="background:#14B8A6">JL</span><span class="av" style="background:#F59E0B">KO</span></div></div>
+            <div class="kb" id="kb">
+              <div class="kcol" data-c="todo"><header><span><i style="background:#8D93B8"></i>To do</span><em>3</em></header><div class="klist">
+                <div class="kc"><span class="t t-design">Design</span><p>Pricing page hero</p><footer><span>Oct 24</span><span class="av" style="background:#6D5BFF">SM</span></footer></div>
+                <div class="kc"><span class="t t-bug">Bug</span><p>Safari login redirect loop</p><footer><span>Oct 22</span><span class="av" style="background:#FF5C7A">AR</span></footer></div>
+                <div class="kc"><span class="t t-mkt">Marketing</span><p>Launch email sequence</p><footer><span>Oct 29</span><span class="av" style="background:#F59E0B">KO</span></footer></div>
+              </div></div>
+              <div class="kcol" data-c="doing"><header><span><i style="background:#FFB547"></i>In progress</span><em>2</em></header><div class="klist">
+                <div class="kc" id="mover"><span class="t t-dev">Development</span><p>Checkout API with Stripe</p><footer><span>Oct 21</span><span class="av" style="background:#14B8A6">JL</span></footer></div>
+                <div class="kc"><span class="t t-design">Design</span><p>Mobile navigation</p><footer><span>Oct 23</span><span class="av" style="background:#6D5BFF">SM</span></footer></div>
+              </div></div>
+              <div class="kcol" data-c="done"><header><span><i style="background:#2EE6A6"></i>Done</span><em>2</em></header><div class="klist">
+                <div class="kc"><span class="t t-ops">Ops</span><p>SSL & CDN configured</p><footer><span>Oct 14</span><span class="av" style="background:#F59E0B">KO</span></footer></div>
+                <div class="kc"><span class="t t-dev">Development</span><p>Users table migration</p><footer><span>Oct 15</span><span class="av" style="background:#14B8A6">JL</span></footer></div>
+              </div></div>
+            </div>
+            <svg class="fake-cursor" id="fcur" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#0A0C18" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <div class="toast-mini" id="tmini">✓ Moved to Done · Sprint 71% complete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="logos">
+  Trusted by 4,000+ product teams
+  <div class="marq"><div class="tr"><span>Northwind</span><span>Lumen</span><span>Arcadia</span><span>Fieldwork</span><span>Kestrel</span><span>Halcyon</span><span>Orbital</span><span>Northwind</span><span>Lumen</span><span>Arcadia</span><span>Fieldwork</span><span>Kestrel</span><span>Halcyon</span><span>Orbital</span></div></div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">Features</span><h2>Everything your team needs. <span class="grad">Nothing it doesn't.</span></h2><p>From the first idea to the final release, every step lives on one fast, beautiful board.</p></div>
+    <div class="bento">
+      <article class="tile t1"><div><h3>Sprints that plan themselves</h3><p>Drop tasks in the backlog, set a goal and a date. TaskBoard Pro balances the workload and flags risks before your deadline does.</p></div>
+        <div class="vis"><div class="sprint">
+          <div class="srow"><span>Design</span><div class="sbar"><i style="left:0;width:38%"></i></div></div>
+          <div class="srow"><span>Checkout API</span><div class="sbar"><i style="left:22%;width:46%"></i></div></div>
+          <div class="srow"><span>QA & testing</span><div class="sbar"><i style="left:55%;width:28%"></i></div></div>
+          <div class="srow"><span>Launch</span><div class="sbar"><i style="left:80%;width:18%"></i></div></div>
+        </div></div></article>
+      <article class="tile t2"><div><h3>Live progress</h3><p>Know where every sprint stands, at a glance.</p></div>
+        <div class="vis"><div class="ring"><svg viewBox="0 0 150 150" width="150" height="150"><defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#8B7BFF"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs><circle cx="75" cy="75" r="62" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="14"/><circle id="ringArc" cx="75" cy="75" r="62" fill="none" stroke="url(#rg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg><b id="ringTxt">0%</b></div></div></article>
+      <article class="tile t3"><div><h3>Reports</h3><p>Velocity and workload, updated live.</p></div><div class="vis"><div class="bars"><i style="height:40%"></i><i style="height:58%"></i><i style="height:46%"></i><i style="height:72%"></i><i style="height:64%"></i><i class="hi" style="height:92%"></i></div></div></article>
+      <article class="tile t4"><div><h3>Time tracking</h3><p>One click on any card. Export timesheets for billing.</p></div><div class="vis"><div class="timer"><span id="timer">01:24:07</span><small>Checkout API · running</small></div></div></article>
+      <article class="tile t5"><div><h3>Keyboard first</h3><p>Fly through work with shortcuts and a command palette.</p></div><div class="vis"><div class="kbd"><span>⌘ K</span><span>N</span><span>new task</span><span>M</span><span>move</span><span>/</span><span>search</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:40px">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">How it works</span><h2>Up and running in three steps</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Import your work</h3><p>Bring boards from Trello, Jira or a spreadsheet in one click. Comments and attachments come too.</p></div>
+      <div class="step"><h3>Invite your team</h3><p>Add teammates and clients with the right permissions. Guests only see what you share.</p></div>
+      <div class="step"><h3>Plan and ship</h3><p>Run sprints, track time and watch reports update as tasks move to done.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="integrations">
+  <div class="wrap orbit-wrap">
+    <div>
+      <span class="eyebrow">Integrations</span>
+      <h2 style="font-size:clamp(40px,5vw,68px);font-weight:800">Plays well with the tools you already use</h2>
+      <p style="color:var(--muted);font-size:18px;margin:22px 0 30px;max-width:480px">Connect chat, code, design and docs in seconds. Updates flow both ways, so nobody has to copy and paste again.</p>
+      <a class="btn ghost" href="/preview/taskboard-pro/app">See it in the demo</a>
+    </div>
+    <div class="orbit" aria-hidden="true">
+      <div class="ring-o">
+        <span class="chip" style="left:50%;top:0"><span>Sl</span></span>
+        <span class="chip" style="left:100%;top:50%"><span>Gh</span></span>
+        <span class="chip" style="left:50%;top:100%"><span>Fg</span></span>
+        <span class="chip" style="left:0;top:50%"><span>Nt</span></span>
+      </div>
+      <div class="ring-o r2">
+        <span class="chip" style="left:85%;top:15%"><span>Dr</span></span>
+        <span class="chip" style="left:15%;top:85%"><span>Zm</span></span>
+        <span class="chip" style="left:15%;top:15%"><span>Gc</span></span>
+      </div>
+      <div class="core"><span class="mark"><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="text-align:center">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">Pricing</span><h2>Simple pricing that scales with you</h2><p>Start free. Upgrade when your team grows.</p></div>
+    <div class="toggle" role="group" aria-label="Billing period"><button aria-pressed="true" data-b="m">Monthly</button><button aria-pressed="false" data-b="y">Yearly<small>−20%</small></button></div>
+    <div class="plans">
+      <div class="plan"><h3>Starter</h3><p class="d">For small teams getting organised.</p><div class="price">€0<small> /user/mo</small></div><ul><li>Up to 5 users</li><li>3 boards</li><li>Basic reports</li><li>Mobile apps</li></ul><a class="btn ghost" href="/preview/taskboard-pro/login?signup=1">Start free</a></div>
+      <div class="plan pop"><h3>Pro</h3><p class="d">For teams that ship every week.</p><div class="price"><span data-m="9" data-y="7">€9</span><small> /user/mo</small></div><ul><li>Unlimited users & boards</li><li>Sprints & time tracking</li><li>Advanced reports</li><li>Guest access for clients</li><li>AI sprint planning</li></ul><a class="btn primary" href="/preview/taskboard-pro/login?signup=1">Start 14-day trial</a></div>
+      <div class="plan"><h3>Business</h3><p class="d">For companies with security needs.</p><div class="price"><span data-m="19" data-y="15">€19</span><small> /user/mo</small></div><ul><li>Everything in Pro</li><li>SSO & audit log</li><li>Custom roles</li><li>Priority support</li></ul><a class="btn ghost" href="#faq">Talk to sales</a></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:40px">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">Loved by teams</span><h2>Don't take our word for it</h2></div>
+    <div class="quotes">
+      <div class="q"><p>We moved 14 boards from Jira in an afternoon. Standups went from 30 minutes to 10.</p><footer><span class="av" style="background:#6D5BFF">LM</span><span>Laura Mei<small>Head of Product, Lumen</small></span></footer></div>
+      <div class="q"><p>The keyboard shortcuts alone are worth it. It's the first tool the whole team actually likes opening.</p><footer><span class="av" style="background:#14B8A6">DK</span><span>David Kim<small>Engineering lead, Arcadia</small></span></footer></div>
+      <div class="q"><p>Guest access changed how we work with clients. They see progress live and stopped emailing for updates.</p><footer><span class="av" style="background:#FF5C7A">SB</span><span>Sara Bianchi<small>Founder, Fieldwork Studio</small></span></footer></div>
+      <div class="q"><p>Sprint reports used to take me an hour every Friday. Now they're just there.</p><footer><span class="av" style="background:#F59E0B">TO</span><span>Tunde Okoye<small>Scrum master, Kestrel</small></span></footer></div>
+      <div class="q"><p>Fast. Really fast. Everything opens instantly, even on our 2,000-task backlog.</p><footer><span class="av" style="background:#8B5CF6">AN</span><span>Anna Novak<small>CTO, Orbital</small></span></footer></div>
+      <div class="q"><p>Time tracking right on the card means billing clients is finally accurate.</p><footer><span class="av" style="background:#22C55E">MR</span><span>Marco Rossi<small>Agency owner, Halcyon</small></span></footer></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">FAQ</span><h2>Questions, answered</h2></div>
+    <div class="faq">
+      <details open><summary>Can I import from Trello or Jira?</summary><p>Yes. Connect your account and import boards, cards, comments and attachments in a few minutes.</p></details>
+      <details><summary>What happens when the trial ends?</summary><p>You choose a plan or move to Starter. Your boards and data stay exactly as they are.</p></details>
+      <details><summary>Is my data secure?</summary><p>Data is encrypted in transit and at rest, hosted in the EU, with daily backups and SSO on Business.</p></details>
+      <details><summary>Do you offer discounts for non-profits?</summary><p>Yes. Registered non-profits and schools get 50% off Pro and Business.</p></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="final">
+      <h2>Get your team on <span class="grad">one board</span> today</h2>
+      <p>Free for up to five people. Set up in two minutes.</p>
+      <div class="cta-row"><a class="btn primary" href="/preview/taskboard-pro/login?signup=1">Start free</a><a class="btn ghost" href="/preview/taskboard-pro/app">Open live demo</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><a class="logo" href="#top"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>TaskBoard Pro</a><nav><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/preview/taskboard-pro/login">Log in</a></nav><span>© 2026 TaskBoard Pro</span></div></footer>
+
+<div class="ilx" role="note"><span class="t">Demo by <b>iLoomX</b></span><a href="/preview">All projects</a><a class="go" href="/">Start a project</a><button aria-label="Hide this bar" onclick="this.parentElement.remove()">×</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+<script>
+const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+// pricing
+document.querySelectorAll('.toggle button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.toggle button').forEach(x=>x.setAttribute('aria-pressed',x===b));document.querySelectorAll('.price span[data-m]').forEach(s=>s.textContent='€'+s.dataset[b.dataset.b])});
+// spotlight tiles
+document.querySelectorAll('.tile').forEach(t=>t.addEventListener('pointermove',e=>{const r=t.getBoundingClientRect();t.style.setProperty('--mx',e.clientX-r.left+'px');t.style.setProperty('--my',e.clientY-r.top+'px')}));
+// timer
+let secs=5047;setInterval(()=>{secs++;const p=n=>String(n).padStart(2,'0');document.getElementById('timer').textContent=`${p(Math.floor(secs/3600))}:${p(Math.floor(secs%3600/60))}:${p(secs%60)}`},1000);
+
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(window.gsap&&!reduce){
+  gsap.registerPlugin(ScrollTrigger);gsap.ticker.lagSmoothing(0);
+  gsap.from('.hero h1 .w',{yPercent:60,opacity:0,filter:'blur(12px)',duration:1.1,ease:'expo.out',stagger:.06,delay:.1});
+  gsap.from('.hero .pill,.hero .sub,.cta-row,.trust-line',{y:24,opacity:0,duration:1,ease:'expo.out',stagger:.08,delay:.45});
+  gsap.from('.stage',{y:120,opacity:0,duration:1.6,ease:'expo.out',delay:.6});
+  gsap.to('#mock',{rotateX:0,scale:1,ease:'none',scrollTrigger:{trigger:'.stage',start:'top 85%',end:'top 20%',scrub:true}});
+  gsap.utils.toArray('.tile,.step,.plan,.q').forEach(el=>gsap.from(el,{y:50,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 90%'}}));
+  gsap.from('.sbar i',{scaleX:0,duration:1.4,ease:'expo.out',stagger:.12,scrollTrigger:{trigger:'.sprint',start:'top 85%'}});
+  gsap.from('.bars i',{scaleY:0,duration:1.2,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:'.bars',start:'top 90%'}});
+  const o={v:0};gsap.to(o,{v:71,duration:2,ease:'power3.out',scrollTrigger:{trigger:'.ring',start:'top 90%'},onUpdate:()=>{document.getElementById('ringArc').style.strokeDashoffset=389.6*(1-o.v/100);document.getElementById('ringTxt').textContent=Math.round(o.v)+'%'}});
+}else{document.getElementById('ringArc').style.strokeDashoffset=389.6*.29;document.getElementById('ringTxt').textContent='71%';document.getElementById('mock').style.transform='none'}
+
+// auto demo: fake cursor drags a card to Done, then back
+(function(){
+  if(!window.gsap||!window.Flip||reduce)return;gsap.registerPlugin(Flip);
+  const main=document.querySelector('.main'),cur=document.getElementById('fcur'),card=document.getElementById('mover'),toast=document.getElementById('tmini');
+  const lists={doing:document.querySelector('[data-c="doing"] .klist'),done:document.querySelector('[data-c="done"] .klist')};
+  const counts=()=>document.querySelectorAll('.kcol').forEach(c=>c.querySelector('em').textContent=c.querySelectorAll('.kc').length);
+  const pos=el=>{const a=el.getBoundingClientRect(),m=main.getBoundingClientRect();return{x:a.left-m.left+a.width*.55,y:a.top-m.top+a.height*.45}};
+  gsap.set(cur,{x:pos(card).x+120,y:pos(card).y+160,opacity:0});
+  function run(to){
+    const tl=gsap.timeline({delay:1.4,onComplete:()=>run(to==='done'?'doing':'done')});
+    tl.to(cur,{opacity:1,duration:.3}).to(cur,{...pos(card),duration:.9,ease:'power2.inOut'})
+      .add(()=>card.classList.add('glow')).to(cur,{scale:.85,duration:.15})
+      .add(()=>{const st=Flip.getState(card);lists[to].prepend(card);counts();Flip.from(st,{duration:.9,ease:'power3.inOut'});gsap.to(cur,{...pos(card),duration:.9,ease:'power3.inOut'})})
+      .to({},{duration:.95}).to(cur,{scale:1,duration:.15}).add(()=>{card.classList.remove('glow');if(to==='done'){toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),2200)}})
+      .to(cur,{x:'+=120',y:'+=90',opacity:0,duration:.8,ease:'power2.in'},'+=.6');
+  }
+  ScrollTrigger.create({trigger:'.stage',start:'top 70%',once:true,onEnter:()=>run('done')});
+})();
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas=document.getElementById('waves');
+const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(55,1,.1,200);
+camera.position.set(0,7,22);camera.lookAt(0,0,-6);
+const SX=180,SY=90,geo=new THREE.PlaneGeometry(90,48,SX,SY);
+const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+  uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uPR:{value:renderer.getPixelRatio()}},
+  vertexShader:`uniform float uT;uniform vec2 uM;uniform float uPR;varying float vH;varying float vD;
+  void main(){vec3 p=position;
+    float h=sin(p.x*.18+uT*.8)*.9+cos(p.y*.22+uT*.6)*.7+sin((p.x+p.y)*.09+uT*.4)*1.2;
+    float d=distance(p.xy,uM*vec2(40.,22.));h+=exp(-d*d*.01)*2.2;
+    p.z=h;vH=h;vec4 mv=modelViewMatrix*vec4(p,1.);vD=-mv.z;
+    gl_PointSize=(2.4*uPR)*(18./vD);gl_Position=projectionMatrix*mv;}`,
+  fragmentShader:`varying float vH;varying float vD;
+  void main(){vec2 c=gl_PointCoord-.5;if(dot(c,c)>.25)discard;
+    vec3 a=vec3(.43,.36,1.),b=vec3(.13,.83,.93);vec3 col=mix(a,b,smoothstep(-1.5,2.5,vH));
+    float fade=smoothstep(60.,12.,vD);gl_FragColor=vec4(col,(.35+.4*smoothstep(-1.,3.,vH))*fade);}`});
+const pts=new THREE.Points(geo,mat);pts.rotation.x=-Math.PI/2.15;pts.position.set(0,-2,-12);scene.add(pts);
+function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+let tm=new THREE.Vector2(),vis=true;addEventListener('pointermove',e=>tm.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight*2-1)));
+new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(canvas);
+const clock=new THREE.Clock(),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function f(){requestAnimationFrame(f);if(!vis)return;mat.uniforms.uT.value=reduce?0:clock.getElapsedTime();mat.uniforms.uM.value.lerp(tm,.05);renderer.render(scene,camera)})();
+</script>
+</body>
+</html>
